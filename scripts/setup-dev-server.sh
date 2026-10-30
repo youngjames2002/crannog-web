@@ -11,7 +11,7 @@
 set -euo pipefail
 
 DEV_USER=crannog
-APP_PORT=8000
+APP_PORT=8100
 TS_V4=100.64.0.0/10
 TS_V6=fd7a:115c:a1e0::/48
 SSHD_CONFIG=/etc/ssh/sshd_config
@@ -114,8 +114,8 @@ cat <<EOF
 Done.
 
   Connect:   ssh $DEV_USER@$TS_IP
-  Run app:   uv run uvicorn app.main:app --reload --host $TS_IP --port $APP_PORT
-  Browse:    http://$TS_IP:$APP_PORT
+  Run app:   .venv/bin/uvicorn app:app --reload --host 127.0.0.1 --port $APP_PORT
+  Browse:    https://crannog-dev.pascal345.uk (via Cloudflare tunnel)
 
 Next: share this machine with the other developer from the Tailscale admin
 console (Machines -> homeserver -> Share), then restrict what shared users can
