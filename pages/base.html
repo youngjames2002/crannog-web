@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crannog</title>
+        <link rel="icon" href="/assets/C3TRANSPARENTV2.png" type="image/png">
+        <link rel="stylesheet" href="/assets/styles.css">
+    </head>
+    <body>
+        <header>
+            <a href="/"><img src="/assets/C3TRANSPARENTV2.png" alt="Crannog Logo" class="logo"></a>
+            <nav>
+                <a href="/explore">Explore</a>
+                <a href="/who-we-are">Who We Are</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            <p>This is the footer</p>
+        </footer>
+    </body>
+</html>
