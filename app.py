@@ -22,3 +22,19 @@ def who_we_are(request: Request):
 @app.get("/contact")
 def contact(request: Request):
     return templates.TemplateResponse(request, "contact.html")
+
+@app.get("/checkout")
+def checkout(request: Request):
+    return templates.TemplateResponse(request, "checkout.html")
+
+@app.post("/payment")
+def payment(request: Request):
+    print("Payment processing logic goes here")
+
+@app.get("/payment-success")
+def payment_success(request: Request):
+    return templates.TemplateResponse(request, "payment-success.html")
+
+@app.get("/payment-cancelled")
+def payment_cancelled(request: Request): 
+    return templates.TemplateResponse(request, "payment-cancelled.html")

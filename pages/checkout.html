@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>This is the Checkout Page</h1>
+{% set items = ["Item 1", "Item 2", "Item 3"] %}
+<p>preview items:</p>
+<ul>
+{% for item in items %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ul>
+<a href="/payment" class="btn">Proceed to Payment</a>
+{% endblock %}
