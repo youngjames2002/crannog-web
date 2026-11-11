@@ -21,3 +21,13 @@ nav a {
     text-decoration: none;
     border-radius: 5px;
 }
+
+.item {
+    align-items: center;
+    float:left;
+    margin: 20px;
+    background-color: #F5F5DC;
+    padding: 10px;
+    text-align: center;
+    outline: black solid 1px;
+}

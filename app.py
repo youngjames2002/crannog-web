@@ -38,3 +38,9 @@ def payment_success(request: Request):
 @app.get("/payment-cancelled")
 def payment_cancelled(request: Request): 
     return templates.TemplateResponse(request, "payment-cancelled.html")
+
+@app.get("/add-to-basket/{item_id}")
+def add_to_basket(request: Request, item_id: int):
+    # Logic to add the item to the basket goes here
+    print(f"Item {item_id} added to basket")
+    return templates.TemplateResponse(request, "basket.html", {"item_id": item_id})
