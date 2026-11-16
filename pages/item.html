@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="item">
+    <h1>{{ item.name }}</h1>
+    {% for image in item.images %}
+    <img src="{{ image }}" alt="{{ item.name }}">
+    {% endfor %}
+    <p>Price: ${{ item.price }}</p>
+    <p>{{ item['long-description'] }}</p>
+
+    <table class="item-details">
+        {% if item.colour %}
+        <tr><th>Colour</th><td>{{ item.colour }}</td></tr>
+        {% endif %}
+        {% if item.sizes %}
+        <tr><th>Available Sizes</th><td>{{ item.sizes | join(', ') }}</td></tr>
+        {% endif %}
+        {% if item.material %}
+        <tr><th>Material</th><td>{{ item.material }}</td></tr>
+        {% endif %}
+        {% if item.fit %}
+        <tr><th>Fit</th><td>{{ item.fit }}</td></tr>
+        {% endif %}
+        {% if item.care %}
+        <tr><th>Care</th><td>{{ item.care }}</td></tr>
+        {% endif %}
+    </table>
+
+    {% if item.stock == 0 %}
+    <p>Sold out</p>
+    {% else %}
+    {% if item.stock <= 5 %}
+    <p>Only {{ item.stock }} left, buy soon!</p>
+    {% endif %}
+    <a href="/add-to-basket/{{ item.id }}" class="btn">Add to Basket</a>
+    {% endif %}
+    <a href="/explore" class="btn">Back to Explore</a>
+</section>
+{% endblock %}

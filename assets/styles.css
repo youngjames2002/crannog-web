@@ -48,3 +48,15 @@ footer {
     text-align: center;
     font-size: 0.875rem;
 }
+
+.item-details {
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.item-details th,
+.item-details td {
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.75rem;
+    text-align: left;
+}

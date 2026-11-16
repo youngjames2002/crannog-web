@@ -3,12 +3,6 @@
 {% block content %}
 <h1>This is the Explore Page</h1>
 
-{% set items = [
-    {'id': 1, 'name': 'Item 1', 'price': 19.99},
-    {'id': 2, 'name': 'Item 2', 'price': 29.99},
-    {'id': 3, 'name': 'Item 3', 'price': 39.99}
-] %}
-
 {% if items %}
     <p>Here are some items you can explore:</p>
 {% else %}
@@ -17,11 +11,11 @@
 
 {% for item in items %}
 <section class="item">
-    <h2>This is an example Item named {{ item.name }}</h2>
-    <p>This is an example item description.</p>
-    <img src="https://via.placeholder.com/150" alt="Example Item Image">
+    <h2>{{ item.name }}</h2>
+    <p>{{ item['short-description'] }}</p>
+    <a href="/explore/{{ item.id }}"><img src="https://via.placeholder.com/150" alt="{{ item.name }}"></a>
     <p>Price: ${{ item.price }}</p>
-    <a href="/add-to-basket/{{ item.id }}" class="btn">Add to Basket</a>
+    <a href="/explore/{{ item.id }}" class="btn">View Item</a>
 </section>
 {% endfor %}
 
