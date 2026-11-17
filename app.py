@@ -14,7 +14,7 @@ ITEMS = [
         'long-description': 'A longer description of the item, covering the design, the story behind it and how it wears.',
         'images': ['https://via.placeholder.com/300', 'https://via.placeholder.com/300'],
         'colour': 'Black', 'sizes': ['S', 'M', 'L', 'XL'], 'material': '100% cotton',
-        'fit': 'Regular fit', 'care': 'Machine wash cold, do not tumble dry', 'stock': 12,
+        'fit': 'Regular fit', 'care': 'Machine wash cold, do not tumble dry', 'stock': 12, 'artist': 'artist-1',
     },
     {
         'id': 2, 'name': 'Item 2', 'price': 29.99,
@@ -22,7 +22,7 @@ ITEMS = [
         'long-description': 'A longer description of the item, covering the design, the story behind it and how it wears.',
         'images': ['https://via.placeholder.com/300'],
         'colour': 'Green', 'sizes': ['M', 'L'], 'material': '80% cotton, 20% polyester',
-        'fit': 'Oversized fit', 'care': 'Machine wash 30°C', 'stock': 3,
+        'fit': 'Oversized fit', 'care': 'Machine wash 30°C', 'stock': 3, 'artist': 'artist-2',
     },
     {
         'id': 3, 'name': 'Item 3', 'price': 39.99,
@@ -30,9 +30,43 @@ ITEMS = [
         'long-description': 'A longer description of the item, covering the design, the story behind it and how it wears.',
         'images': ['https://via.placeholder.com/300'],
         'colour': 'Navy', 'sizes': ['S', 'M', 'L'], 'material': '100% wool',
-        'fit': 'Regular fit', 'care': 'Hand wash only', 'stock': 0,
+        'fit': 'Regular fit', 'care': 'Hand wash only', 'stock': 0, 'artist': 'artist-3',
     },
 ]
+
+ARTISTS = [
+    {
+        'slug': 'artist-1', 'name': 'Artist 1',
+        'bio': 'A short bio about the artist, their background and the work they make.',
+        'portrait': 'https://via.placeholder.com/200',
+        'images': ['https://via.placeholder.com/300', 'https://via.placeholder.com/300', 'https://via.placeholder.com/300'],
+        'links': [
+            {'label': 'Instagram', 'url': 'https://example.com/artist-1-instagram'},
+            {'label': 'Website', 'url': 'https://example.com/artist-1'},
+        ],
+    },
+    {
+        'slug': 'artist-2', 'name': 'Artist 2',
+        'bio': 'A short bio about the artist, their background and the work they make.',
+        'portrait': 'https://via.placeholder.com/200',
+        'images': ['https://via.placeholder.com/300', 'https://via.placeholder.com/300'],
+        'links': [
+            {'label': 'Instagram', 'url': 'https://example.com/artist-2-instagram'},
+        ],
+    },
+    {
+        'slug': 'artist-3', 'name': 'Artist 3',
+        'bio': 'A short bio about the artist, their background and the work they make.',
+        'portrait': 'https://via.placeholder.com/200',
+        'images': ['https://via.placeholder.com/300'],
+        'links': [
+            {'label': 'Website', 'url': 'https://example.com/artist-3'},
+        ],
+    },
+]
+
+def find_artist(slug):
+    return next((a for a in ARTISTS if a['slug'] == slug), None)
 
 @app.get("/")
 def home(request: Request):
@@ -40,14 +74,24 @@ def home(request: Request):
 
 @app.get("/explore")
 def explore(request: Request):
-    return templates.TemplateResponse(request, "explore.html", {"items": ITEMS})
+    artists = {a['slug']: a for a in ARTISTS}
+    return templates.TemplateResponse(request, "explore.html", {"items": ITEMS, "artists": artists})
 
 @app.get("/explore/{item_id}")
 def item_detail(request: Request, item_id: int):
     item = next((i for i in ITEMS if i['id'] == item_id), None)
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
-    return templates.TemplateResponse(request, "item.html", {"item": item})
+    artist = find_artist(item['artist'])
+    return templates.TemplateResponse(request, "item.html", {"item": item, "artist": artist})
+
+@app.get("/artist/{artist_slug}")
+def artist_detail(request: Request, artist_slug: str):
+    artist = find_artist(artist_slug)
+    if artist is None:
+        raise HTTPException(status_code=404, detail="Artist not found")
+    items = [i for i in ITEMS if i['artist'] == artist_slug]
+    return templates.TemplateResponse(request, "artist.html", {"artist": artist, "items": items})
 
 @app.get("/who-we-are")
 def who_we_are(request: Request):

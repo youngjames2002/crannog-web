@@ -8,6 +8,9 @@
     {% endfor %}
     <p>Price: ${{ item.price }}</p>
     <p>{{ item['long-description'] }}</p>
+    {% if artist %}
+    <p>Designed by <a href="/artist/{{ artist.slug }}">{{ artist.name }}</a></p>
+    {% endif %}
 
     <table class="item-details">
         {% if item.colour %}

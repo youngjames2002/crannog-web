@@ -13,6 +13,9 @@
 <section class="item">
     <h2>{{ item.name }}</h2>
     <p>{{ item['short-description'] }}</p>
+    {% if item.artist in artists %}
+    <p>Designed by <a href="/artist/{{ item.artist }}">{{ artists[item.artist].name }}</a></p>
+    {% endif %}
     <a href="/explore/{{ item.id }}"><img src="https://via.placeholder.com/150" alt="{{ item.name }}"></a>
     <p>Price: ${{ item.price }}</p>
     <a href="/explore/{{ item.id }}" class="btn">View Item</a>

@@ -60,3 +60,24 @@ footer {
     padding: 0.25rem 0.75rem;
     text-align: left;
 }
+
+.artist {
+    overflow: auto;
+    margin: 20px;
+    text-align: center;
+}
+
+.artist-portrait {
+    border-radius: 50%;
+}
+
+.artist-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.artist-links a {
+    margin: 0 10px;
+}

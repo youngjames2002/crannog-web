@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="artist">
+    <img src="{{ artist.portrait }}" alt="{{ artist.name }}" class="artist-portrait">
+    <h1>{{ artist.name }}</h1>
+
+    {% if artist.bio %}
+    <p>{{ artist.bio }}</p>
+    {% endif %}
+
+    {% if artist.images %}
+    <h2>Work</h2>
+    <div class="artist-gallery">
+        {% for image in artist.images %}
+        <img src="{{ image }}" alt="Work by {{ artist.name }}">
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if artist.links %}
+    <h2>Links</h2>
+    <nav class="artist-links">
+        {% for link in artist.links %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
+        {% endfor %}
+    </nav>
+    {% endif %}
+
+    {% if items %}
+    <h2>Items by {{ artist.name }}</h2>
+    {% for item in items %}
+    <section class="item">
+        <h3>{{ item.name }}</h3>
+        <a href="/explore/{{ item.id }}"><img src="https://via.placeholder.com/150" alt="{{ item.name }}"></a>
+        <p>Price: ${{ item.price }}</p>
+        <a href="/explore/{{ item.id }}" class="btn">View Item</a>
+    </section>
+    {% endfor %}
+    {% endif %}
+</section>
+
+<a href="/explore" class="btn">Back to Explore</a>
+{% endblock %}
