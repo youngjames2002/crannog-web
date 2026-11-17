@@ -85,6 +85,10 @@ def item_detail(request: Request, item_id: int):
     artist = find_artist(item['artist'])
     return templates.TemplateResponse(request, "item.html", {"item": item, "artist": artist})
 
+@app.get("/who-we-are")
+def artists(request: Request):
+    return templates.TemplateResponse(request, "who-we-are.html", {"artists": ARTISTS})
+
 @app.get("/artist/{artist_slug}")
 def artist_detail(request: Request, artist_slug: str):
     artist = find_artist(artist_slug)

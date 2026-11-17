@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>This is the Who We Are Page</h1>
+<h1>Who We Are</h1>
+
+{% for artist in artists %}
+<section class="item">
+    <a href="/artist/{{ artist.slug }}"><img src="{{ artist.portrait }}" alt="{{ artist.name }}" class="artist-portrait"></a>
+    <h2>{{ artist.name }}</h2>
+    <a href="/artist/{{ artist.slug }}" class="btn">View Profile</a>
+</section>
+{% endfor %}
+
 {% endblock %}
